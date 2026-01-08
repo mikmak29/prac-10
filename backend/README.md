@@ -1,3 +1,12 @@
-DIRECTIONS:
+**DIRECTION**
 
-B.I = Backend-Integration
+**LIST-APP with CRUD Integration**
+
+##Models
+
+USERS (personal information, credentials):
+
+- Name
+- Email
+- Password
+- Job

@@ -1,21 +1,17 @@
 import dotenv from "dotenv";
+import asyncErrorHandler from "express-async-handler";
 import app from "./app.js";
+import connectDatabase from "./config/db.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 8100;
 
-const serverStarter = () => {
-	try {
-		app.listen(PORT, () => {
-			console.log(`Server is listening at port ${PORT}`);
-		});
-	} catch (error) {
-		throw new Error({
-			message: error.message,
-			errorStack: error.stack,
-		});
-	}
-};
+const serverStarter = asyncErrorHandler(async () => {
+	await connectDatabase();
+	app.listen(PORT, () => {
+		console.log(`Server is listening at port ${PORT}`);
+	});
+});
 
 serverStarter();
