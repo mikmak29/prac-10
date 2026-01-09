@@ -9,8 +9,6 @@ import { generateAccessToken } from "../helper/generateToken.js";
 export const fetchUsers = asyncErrorHandler(async (req, res) => {
 	const data = await userService.fetchUsersData();
 
-	validateObjectId("dsadas", 404);
-
 	res.status(200).json(data);
 });
 
@@ -67,4 +65,13 @@ export const loginUser = asyncErrorHandler(async (req, res) => {
 	const accessToken = await generateAccessToken({ user });
 
 	res.status(200).json({ accessToken });
+});
+
+export const currentUserData = asyncErrorHandler(async (req, res) => {
+	const data = req.user;
+	if (!data) {
+		return conditionalErrorHandler(res, "Couldn't find the data.", 404);
+	}
+
+	res.status(200).json(data);
 });
