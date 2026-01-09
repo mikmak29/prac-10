@@ -12,6 +12,6 @@ app.use(cors());
 app.use(express.json());
 app.use(compression());
 
-app.use("/api/user", userRoutes);
+app.use("/api", userRoutes);
 
 export default app;
