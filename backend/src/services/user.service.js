@@ -9,5 +9,9 @@ export const registerData = async (userData) => {
 };
 
 export const validateEmail = async (userEmail) => {
-	return await User.findOne({ userEmail });
+	return await User.findOne(userEmail);
+};
+
+export const loginData = async (userEmail) => {
+	return await User.findOne(userEmail);
 };

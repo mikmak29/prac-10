@@ -7,7 +7,7 @@ export const userSchemaValidator = {
 	schema: {
 		body: {
 			yupSchema: Yup.object().shape({
-				userame: Yup.string().required("nameProperty").min(username.NAME_MIN).max(username.NAME_MAX),
+				username: Yup.string().required("nameProperty").min(username.NAME_MIN).max(username.NAME_MAX),
 				email: Yup.string()
 					.required("emailProperty")
 					.min(email.EMAIL_MIN)
