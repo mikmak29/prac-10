@@ -1,5 +1,7 @@
-export const conditionalErrorHandler = (message, status) => {
-	const error = new Error(message);
-	error.statusCode = status;
-	throw error;
+// CODE REFACTORED
+export const conditionalErrorHandler = (res, message, status) => {
+	return res.status(status).json({
+		status: status,
+		message: message,
+	});
 };
