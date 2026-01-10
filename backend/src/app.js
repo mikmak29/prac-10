@@ -4,7 +4,8 @@ import compression from "compression";
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import userRoutes from "./routes/userRoutes.js";
+import userRoute from "./routes/user.routes.js";
+import userNoteRoute from "./routes/userNote.routes.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(compression());
 
-app.use("/api", userRoutes);
+app.use("/api", userRoute);
+app.use("/api", userNoteRoute);
 
 export default app;
