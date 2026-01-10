@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-export const validateObjectId = (id, message = "Invalid ID format.", statusCode = 400) => {
+export const validateObjectId = (id) => {
 	if (!mongoose.Types.ObjectId.isValid(id)) {
-		const error = new Error(message);
-		error.statusCode = statusCode;
+		const error = new Error("Invalid ID ID. Please double-check!");
+		error.statusCode = 400;
 		throw error;
 	}
 	return true;

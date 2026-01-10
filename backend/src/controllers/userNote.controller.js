@@ -2,6 +2,7 @@ import asyncErrorHandler from "express-async-handler";
 
 import { conditionalErrorHandler } from "../helper/conditionalErrorHandler.js";
 import * as userNoteService from "../services/userNote.service.js";
+import { validateObjectId } from "../helper/validateObjectId.js";
 
 export const createUserNote = asyncErrorHandler(async (req, res) => {
 	const { title, note, statusNote, priority } = req.body;
@@ -49,6 +50,8 @@ export const updateUserNoteById = asyncErrorHandler(async (req, res) => {
 		return conditionalErrorHandler(res, "User authentication required.", 401);
 	}
 
+	validateObjectId(id);
+
 	await userNoteService.updateNoteById(id, req.body, true);
 
 	res.status(200).json({
@@ -58,6 +61,8 @@ export const updateUserNoteById = asyncErrorHandler(async (req, res) => {
 
 export const deleteUserNoteById = asyncErrorHandler(async (req, res) => {
 	const { id } = req.params;
+
+	validateObjectId(id);
 
 	const deleteNoteById = await userNoteService.deleteNoteById(id);
 
