@@ -49,7 +49,7 @@ export const updateUserNoteById = asyncErrorHandler(async (req, res) => {
 		return conditionalErrorHandler(res, "User authentication required.", 401);
 	}
 
-	const updateUserNote = await userNoteService.updateNoteById(id, req.body, true);
+	await userNoteService.updateNoteById(id, req.body, true);
 
 	res.status(200).json({
 		message: "Note updated successfully!",

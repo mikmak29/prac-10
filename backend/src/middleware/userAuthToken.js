@@ -21,7 +21,6 @@ export const userAuthToken = asyncErrorHandler(async (req, res, next) => {
 		// Extract user from decoded token (handle both new and old token structures)
 		const user = decoded.user || decoded;
 
-		console.log(user);
 		// Ensure we have _id (required for user identification)
 		if (!user || !user._id) {
 			return conditionalErrorHandler(res, "Invalid token structure.", 401);
