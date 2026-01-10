@@ -63,29 +63,38 @@ export const loginUser = asyncErrorHandler(async (req, res) => {
 		return conditionalErrorHandler(res, "Invalid email or password.", 401);
 	}
 
-	const accessToken = await generateAccessToken({ user });
-	const refreshToken = await generateRefreshAccessToken({ user });
+	// Only include necessary fields in token (exclude password)
+	const userPayload = {
+		_id: user._id,
+		username: user.username,
+		email: user.email,
+		job: user.job,
+	};
+
+	const accessToken = await generateAccessToken({ user: userPayload });
+	const refreshToken = await generateRefreshAccessToken({ user: userPayload });
 
 	res.cookie("RefreshToken", refreshToken, {
 		httpOnly: true,
 		secure: true,
 		sameSite: "strict",
-		path: "/api/user",
+		path: "/api",
 	});
 
 	res.status(200).json({ accessToken, refreshToken });
 });
 
 export const refreshAccessToken = asyncErrorHandler(async (req, res) => {
-	const token = req.cookies?.RefreshToken;
+	const token = req.cookies?.RefreshToken; // Retrieve cookies
 
+	// Validate the token if exist
 	if (!token) {
 		return conditionalErrorHandler(res, "Refresh token not found.", 401);
 	}
 
 	try {
-		// Verify the refresh token
-		const decoded = jwt.verify(token, process.env.PRIVATE_REFRESH_ACCESS_TOKEN);
+		// Verify the refresh token for the User
+		const decoded = jwt.verify(token, process.env.PRIVATE_REFRESH_ACCESS_TOKEN); // Throw a data of the User
 
 		// Extract user data from decoded token
 		// The decoded payload contains the user object that was signed during login

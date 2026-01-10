@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import app from "./app.js";
 import connectDatabase from "./config/db.js";
+import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
 

@@ -2,7 +2,7 @@ import { expressYupMiddleware } from "express-yup-middleware";
 import express from "express";
 
 import * as userController from "../controllers/user.controller.js";
-import { userSchemaValidator } from "../validators/test.validator.js";
+import { userSchemaValidator } from "../validators/user.validator.js";
 import { userAuthToken } from "../middleware/userAuthToken.js";
 
 const route = express.Router();

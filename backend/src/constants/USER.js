@@ -16,3 +16,14 @@ export const USER_CHAR_LENGTH = {
 		JOB_MAX: 50,
 	},
 };
+
+export const NOTE_COMPONENTS_CHAR_LENGTH = {
+	title: {
+		TITLE_MIN: 2,
+		TITLE_MAX: 50,
+	},
+	note: {
+		NOTE_MIN: 10,
+		NOTE_MAX: 1000,
+	},
+};
